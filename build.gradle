@@ -18,6 +18,9 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
+  compile 'ch.hsr:geohash:1.0.10'
+  compile 'com.google.guava:guava:18.0'
+
   jmh "org.openjdk.jmh:jmh-core:$jmhVersion"
   jmh "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
 

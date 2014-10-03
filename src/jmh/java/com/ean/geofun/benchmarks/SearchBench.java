@@ -1,6 +1,7 @@
 package com.ean.geofun.benchmarks;
 
 import com.ean.geofun.ActivePropertyList;
+import com.ean.geofun.GeoHashSearch;
 import com.ean.geofun.LinearSearch;
 import com.ean.geofun.ParallelLinearSearch;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -32,6 +33,7 @@ public class SearchBench {
       search = new LinearSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
     }
   }
+
   @State(Scope.Benchmark)
   public static class ParallelLinearSearchHolder {
     ParallelLinearSearch search ;
@@ -41,13 +43,27 @@ public class SearchBench {
     }
   }
 
+  @State(Scope.Benchmark)
+  public static class GeoHashSearchHolder {
+    GeoHashSearch search ;
+    @Setup
+    public void setup() throws IOException {
+      search = new GeoHashSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
+    }
+  }
+
   @Benchmark
   public void measureLinearSearch(Blackhole bh, LinearSearchHolder searchHolder) {
     bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
   }
 
   @Benchmark
-  public void measureParrellelLinearSearch(Blackhole bh, ParallelLinearSearchHolder searchHolder) {
+  public void measureParallelLinearSearch(Blackhole bh, ParallelLinearSearchHolder searchHolder) {
+    bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
+  }
+
+  @Benchmark
+  public void measureGeoHashSearch(Blackhole bh, GeoHashSearchHolder searchHolder) {
     bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
   }
 }

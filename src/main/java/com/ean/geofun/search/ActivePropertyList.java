@@ -1,4 +1,4 @@
-package com.ean.geofun;
+package com.ean.geofun.search;
 
 import java.io.IOException;
 import java.nio.file.Files;

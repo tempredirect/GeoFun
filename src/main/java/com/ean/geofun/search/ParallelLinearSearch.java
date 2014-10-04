@@ -1,4 +1,4 @@
-package com.ean.geofun;
+package com.ean.geofun.search;
 
 import ch.hsr.geohash.WGS84Point;
 

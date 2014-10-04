@@ -1,4 +1,4 @@
-package com.ean.geofun;
+package com.ean.geofun.search;
 
 import java.nio.file.Paths;
 import java.util.List;

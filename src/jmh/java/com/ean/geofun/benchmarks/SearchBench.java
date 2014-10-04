@@ -1,9 +1,9 @@
 package com.ean.geofun.benchmarks;
 
-import com.ean.geofun.ActivePropertyList;
-import com.ean.geofun.GeoHashSearch;
-import com.ean.geofun.LinearSearch;
-import com.ean.geofun.ParallelLinearSearch;
+import com.ean.geofun.search.ActivePropertyList;
+import com.ean.geofun.search.GeoHashSearch;
+import com.ean.geofun.search.LinearSearch;
+import com.ean.geofun.search.ParallelLinearSearch;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-import static com.ean.geofun.WellKnownLocation.NEW_YORK_CITY;
+import static com.ean.geofun.search.WellKnownLocation.NEW_YORK_CITY;
 
 /**
  *

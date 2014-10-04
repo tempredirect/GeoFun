@@ -1,6 +1,7 @@
 package com.ean.geofun;
 
 import ch.hsr.geohash.WGS84Point;
+import com.google.common.base.Charsets;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +20,7 @@ public class ActivePropertyList {
   }
 
   public Stream<Hotel> stream() throws IOException {
-    return Files.lines(path)
+    return Files.lines(path, Charsets.ISO_8859_1)
         .skip(1)
         .map(
             (line) -> {

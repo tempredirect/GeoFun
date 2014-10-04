@@ -1,5 +1,7 @@
 package com.ean.geofun;
 
+import ch.hsr.geohash.WGS84Point;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -17,17 +19,10 @@ public class LinearSearch implements Search {
   }
 
   @Override
-  public List<Hotel> search(float[] latLon, int radiusM) {
+  public List<Hotel> search(WGS84Point point, int radiusM) {
     return hotels.stream()
-        .filter((hotel) -> hotel.distanceTo(latLon) <= radiusM)
+        .filter((hotel) -> hotel.distanceTo(point) <= radiusM * 1000)
         .collect(Collectors.toList());
   }
 
-  public static void main(String[] args) throws IOException {
-    LinearSearch search = new LinearSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
-    System.out.println("Loaded");
-    List<Hotel> results = search.search(new float[]{40.7142700f, -74.0059700f}, 20);
-
-    System.out.printf("New York 20km : %s\n", results.size());
-  }
 }

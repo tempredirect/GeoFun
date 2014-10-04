@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
+import static com.ean.geofun.WellKnownLocation.NEW_YORK_CITY;
+
 /**
  *
  */
@@ -54,16 +56,16 @@ public class SearchBench {
 
   @Benchmark
   public void measureLinearSearch(Blackhole bh, LinearSearchHolder searchHolder) {
-    bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
+    bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
   }
 
   @Benchmark
   public void measureParallelLinearSearch(Blackhole bh, ParallelLinearSearchHolder searchHolder) {
-    bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
+    bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
   }
 
   @Benchmark
   public void measureGeoHashSearch(Blackhole bh, GeoHashSearchHolder searchHolder) {
-    bh.consume(searchHolder.search.search(new float[]{40.7142700f, -74.0059700f}, 20));
+    bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
   }
 }

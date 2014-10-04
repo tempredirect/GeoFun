@@ -3,12 +3,15 @@ package com.ean.geofun;
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.queries.GeoHashCircleQuery;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,38 +20,53 @@ import java.util.stream.Stream;
  */
 public class GeoHashSearch implements Search {
 
-  ListMultimap<GeoHash, Hotel> hotels = ArrayListMultimap.create(30_000, 500);
+//  ListMultimap<GeoHash, Hotel> hotels = ArrayListMultimap.create(30_000, 500);
 
 //  SortedMap<GeoHash, Hotel> hotels = new TreeMap<>();
+  SortedMap<Long, List<Hotel>> hotels = new TreeMap<>();
 
   public GeoHashSearch(ActivePropertyList propertyList) throws IOException {
-    propertyList.stream().forEach((hotel) ->
-            hotels.put(GeoHash.withBitPrecision(hotel.getLatitude(), hotel.getLongitude(), 17), hotel)
+    AtomicInteger counter = new AtomicInteger();
+    propertyList.stream().forEach((hotel) -> {
+          Long key = GeoHash.withBitPrecision(hotel.getLatitude(), hotel.getLongitude(), 64).longValue();
+          List<Hotel> container = hotels.get(key);
+          if (container == null) {
+            container = new ArrayList<>();
+            hotels.put(key, container);
+          }
+          container.add(hotel);
+          counter.incrementAndGet();
+        }
     );
+    long propertyListSize = propertyList.stream().collect(Collectors.counting());
+    if ( propertyListSize != counter.get()) {
+      throw new IllegalStateException("We lost some " + propertyListSize + " v " + hotels.size());
+    }
   }
 
   @Override
-  public List<Hotel> search(float[] latLon, int radiusM) {
-    GeoHashCircleQuery query = new GeoHashCircleQuery(new WGS84Point(latLon[0], latLon[1]), radiusM * 1000);
+  public List<Hotel> search(WGS84Point point, int radiusM) {
+    GeoHashCircleQuery query = new GeoHashCircleQuery(point, radiusM * 1000);
 
     return query.getSearchHashes()
         .stream()
-        .flatMap((hash) ->
+        .flatMap(
+            (hash) ->
                 Stream.concat(Stream.of(hash), Stream.of(hash.getAdjacent()))
         )
         .distinct()
-        .flatMap((hash) ->
-                hotels.get(hash).stream()
+        .flatMap(
+            (hash) -> {
+              long mask = Long.MAX_VALUE >> (hash.significantBits()-1);
+              Long tail = mask | hash.longValue(); // will keep the hash bits and leave the tail as 1111
+              return hotels.subMap(hash.longValue(), tail).values().stream();
+            }
         )
-        .filter((hotel) -> hotel.distanceTo(latLon) <= radiusM)
+        .flatMap(Collection::stream)
+        .filter(
+            (hotel) ->
+                hotel.distanceTo(point) <= radiusM * 1000)
         .collect(Collectors.toList()); //.stream().collect(Collectors.toList());
   }
 
-  public static void main(String[] args) throws IOException {
-    GeoHashSearch search = new GeoHashSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
-    System.out.println("Loaded");
-    List<Hotel> results = search.search(new float[]{40.7142700f, -74.0059700f}, 20);
-
-    System.out.printf("New York 20km : %s\n", results.size());
-  }
 }

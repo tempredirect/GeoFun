@@ -16,6 +16,7 @@ apply plugin: 'me.champeau.gradle.jmh'
 
 ext.jmhVersion = "1.0.1"
 
+logger.lifecycle org.gradle.internal.jvm.Jvm.current() as String
 // In this section you declare where to find the dependencies of your project
 repositories {
   jcenter()

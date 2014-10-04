@@ -13,9 +13,14 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    Class [] searches = new Class[] {LinearSearch.class, ParallelLinearSearch.class, GeoHashSearch.class};
+    Class [] searches = new Class[] {
+        LinearSearch.class,
+        ParallelLinearSearch.class,
+        GeoHashSearch.class,
+        GeoHashSearch2.class
+    };
 
-    ActivePropertyList activePropertyList = new ActivePropertyList(Paths.get("ActivePropertyList.txt"));
+    ActivePropertyList activePropertyList = new ActivePropertyList(Paths.get("src/ratpack/ActivePropertyList.txt"));
     for (Class search : searches) {
       Search instance = (Search)search.getConstructor(ActivePropertyList.class).newInstance(activePropertyList);
 

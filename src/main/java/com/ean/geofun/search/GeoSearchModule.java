@@ -20,6 +20,6 @@ public class GeoSearchModule extends AbstractModule {
   @Singleton
   @Provides
   public Search search(LaunchConfig launchConfig) throws IOException {
-    return new GeoHashSearch(new ActivePropertyList(launchConfig.getBaseDir().file("ActivePropertyList.txt")));
+    return new GeoHashSearch2(new ActivePropertyList(launchConfig.getBaseDir().file("ActivePropertyList.txt")));
   }
 }

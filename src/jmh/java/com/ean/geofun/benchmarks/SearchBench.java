@@ -2,6 +2,7 @@ package com.ean.geofun.benchmarks;
 
 import com.ean.geofun.ActivePropertyList;
 import com.ean.geofun.search.GeoHashSearch;
+import com.ean.geofun.search.GeoHashSearch2;
 import com.ean.geofun.search.LinearSearch;
 import com.ean.geofun.search.ParallelLinearSearch;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -54,6 +55,15 @@ public class SearchBench {
     }
   }
 
+  @State(Scope.Benchmark)
+  public static class GeoHashSearch2Holder {
+    GeoHashSearch2 search ;
+    @Setup
+    public void setup() throws IOException {
+      search = new GeoHashSearch2(new ActivePropertyList(Paths.get("src/ratpack/ActivePropertyList.txt")));
+    }
+  }
+
   @Benchmark
   public void measureLinearSearch(Blackhole bh, LinearSearchHolder searchHolder) {
     bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
@@ -66,6 +76,11 @@ public class SearchBench {
 
   @Benchmark
   public void measureGeoHashSearch(Blackhole bh, GeoHashSearchHolder searchHolder) {
+    bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
+  }
+
+  @Benchmark
+  public void measureGeoHashSearch2(Blackhole bh, GeoHashSearch2Holder searchHolder) {
     bh.consume(searchHolder.search.search(NEW_YORK_CITY.point(), 20));
   }
 }

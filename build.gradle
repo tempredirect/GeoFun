@@ -42,3 +42,7 @@ tasks.compileJava << {
   // from compileJava will override that from jmh dir *sigh*
   delete "${sourceSets.main.output.classesDir}/META-INF"
 }
+
+task stage {
+  dependsOn installApp
+}

@@ -1,7 +1,7 @@
 import ch.hsr.geohash.WGS84Point
 import com.ean.geofun.search.GeoSearchModule
 import com.ean.geofun.search.Search
-import com.ean.geofun.search.WellKnownLocation
+import com.ean.geofun.WellKnownLocation
 import ratpack.jackson.JacksonModule
 
 import static ratpack.groovy.Groovy.ratpack
@@ -18,8 +18,7 @@ ratpack {
   handlers {
     get {
       render groovyTemplate("index.html",
-          mapsApiKey: 'AIzaSyA15yetFIBl20C3cdh5J3-EdelUKMQ0LvU',
-          startLocation: WellKnownLocation.LONDON.point()
+          locations: WellKnownLocation.values() as List
       )
     }
 

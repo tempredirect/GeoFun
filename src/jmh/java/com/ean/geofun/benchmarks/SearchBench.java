@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-import static com.ean.geofun.search.WellKnownLocation.NEW_YORK_CITY;
+import static com.ean.geofun.WellKnownLocation.NEW_YORK_CITY;
 
 /**
  *

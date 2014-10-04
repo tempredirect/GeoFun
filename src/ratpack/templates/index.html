@@ -1,71 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style type="text/css">
-        html, body {
-            height: 100%; margin: 0; padding: 0;
-        }
-        #map-canvas {
-            height:600px;
-            width:1000px;
-        }
-    </style>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=${model.mapsApiKey}&libraries=drawing">
-    </script>
-    <script type="text/javascript"
-            src="https://code.jquery.com/jquery-2.1.1.js">
-    </script>
-    <script type="text/javascript">
-        function initialize() {
-            var hotelMarkers = {}; // all known hotelMarkers
-            var mapOptions = {
-                center: { lat: ${model.startLocation.latitude}, lng: ${model.startLocation.longitude} },
-                zoom: 9
-            };
-            var map = new google.maps.Map(document.getElementById('map-canvas'),
-                    mapOptions);
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            google.maps.event.addListener(map, 'click', function(ev) {
-                jQuery.ajax("/search", {
-                    data: {
-                        lat:ev.latLng.lat(),
-                        lng:ev.latLng.lng(),
-                        radius:10
-                    },
-                    success:function(data) {
-//                        console.table(data);
-                        var len = data.length,
-                                i;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/app.css">
 
-                        for (i = 0; i < len; i++) {
-                            var hotel = data[i];
-
-                            var idAsString = "" + hotel.id;
-                            if (!(idAsString in hotelMarkers)) {
-
-                                hotelMarkers[idAsString] = new google.maps.Marker({
-                                    title:hotel.name,
-                                    position:new google.maps.LatLng(hotel.latitude, hotel.longitude),
-                                    map: map,
-                                    visible:true
-                                })
-                            }
-
-                        }
-                    },
-                    error:function(xhr, status, error) {
-                        console.error(status, error, xhr)
-                    }
-                });
-            });
-
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
 </head>
 <body>
-<div id="map-canvas"></div>
+    <div class="container">
+        <div class="page-header">
+            <h1>Geo fun <small>Find hotels at the click of a mouse</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="list-group location-list">
+                    <%model.locations.each { location -> %>
+                    <a href="#" class="list-group-item ${location.name() == 'LONDON' ? 'active' : ''}"
+                       data-lat="${location.point().latitude}" data-lng="${location.point().longitude}">${location.description()}</a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-lg-8"><div id="map-canvas"></div></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRWK7k6ihiE4eFGjHwdwr5_mQ6r_4dyaA&libraries=drawing"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

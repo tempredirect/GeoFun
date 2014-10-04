@@ -32,7 +32,7 @@ public class SearchBench {
     LinearSearch search ;
     @Setup
     public void setup() throws IOException {
-      search = new LinearSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
+      search = new LinearSearch(new ActivePropertyList(Paths.get("src/ratpack/ActivePropertyList.txt")));
     }
   }
 
@@ -41,7 +41,7 @@ public class SearchBench {
     ParallelLinearSearch search ;
     @Setup
     public void setup() throws IOException {
-      search = new ParallelLinearSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
+      search = new ParallelLinearSearch(new ActivePropertyList(Paths.get("src/ratpack/ActivePropertyList.txt")));
     }
   }
 
@@ -50,7 +50,7 @@ public class SearchBench {
     GeoHashSearch search ;
     @Setup
     public void setup() throws IOException {
-      search = new GeoHashSearch(new ActivePropertyList(Paths.get("ActivePropertyList.txt")));
+      search = new GeoHashSearch(new ActivePropertyList(Paths.get("src/ratpack/ActivePropertyList.txt")));
     }
   }
 

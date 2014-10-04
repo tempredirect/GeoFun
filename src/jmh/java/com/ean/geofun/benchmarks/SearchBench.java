@@ -1,6 +1,6 @@
 package com.ean.geofun.benchmarks;
 
-import com.ean.geofun.search.ActivePropertyList;
+import com.ean.geofun.ActivePropertyList;
 import com.ean.geofun.search.GeoHashSearch;
 import com.ean.geofun.search.LinearSearch;
 import com.ean.geofun.search.ParallelLinearSearch;

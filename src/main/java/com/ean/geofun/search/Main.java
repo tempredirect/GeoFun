@@ -1,5 +1,8 @@
 package com.ean.geofun.search;
 
+import com.ean.geofun.ActivePropertyList;
+import com.ean.geofun.Hotel;
+
 import java.nio.file.Paths;
 import java.util.List;
 

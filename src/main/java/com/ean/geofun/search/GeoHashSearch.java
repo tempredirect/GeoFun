@@ -3,9 +3,10 @@ package com.ean.geofun.search;
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.queries.GeoHashCircleQuery;
+import com.ean.geofun.ActivePropertyList;
+import com.ean.geofun.Hotel;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -45,8 +46,8 @@ public class GeoHashSearch implements Search {
   }
 
   @Override
-  public List<Hotel> search(WGS84Point point, int radiusM) {
-    GeoHashCircleQuery query = new GeoHashCircleQuery(point, radiusM * 1000);
+  public List<Hotel> search(WGS84Point point, int radiusKm) {
+    GeoHashCircleQuery query = new GeoHashCircleQuery(point, radiusKm * 1000);
 
     return query.getSearchHashes()
         .stream()
@@ -65,7 +66,7 @@ public class GeoHashSearch implements Search {
         .flatMap(Collection::stream)
         .filter(
             (hotel) ->
-                hotel.distanceTo(point) <= radiusM * 1000)
+                hotel.distanceTo(point) <= radiusKm * 1000)
         .collect(Collectors.toList()); //.stream().collect(Collectors.toList());
   }
 

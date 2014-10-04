@@ -4,9 +4,14 @@ buildscript {
   }
   dependencies {
     classpath 'me.champeau.gradle:jmh-gradle-plugin:0.1.2'
+    classpath "io.ratpack:ratpack-gradle:0.9.9"
   }
 }
-apply plugin: 'java'
+
+
+apply plugin: "io.ratpack.ratpack-groovy"
+apply plugin: "idea"
+apply plugin: 'groovy'
 apply plugin: 'me.champeau.gradle.jmh'
 
 ext.jmhVersion = "1.0.1"
@@ -20,7 +25,9 @@ repositories {
 dependencies {
   compile 'ch.hsr:geohash:1.0.10'
   compile 'com.google.guava:guava:18.0'
+  compile 'io.ratpack:ratpack-jackson:0.9.9'
 
+  runtime "org.slf4j:slf4j-simple:1.7.5"
   jmh "org.openjdk.jmh:jmh-core:$jmhVersion"
   jmh "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
 

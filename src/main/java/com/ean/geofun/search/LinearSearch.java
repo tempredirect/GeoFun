@@ -1,9 +1,10 @@
 package com.ean.geofun.search;
 
 import ch.hsr.geohash.WGS84Point;
+import com.ean.geofun.ActivePropertyList;
+import com.ean.geofun.Hotel;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 

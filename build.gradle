@@ -27,6 +27,7 @@ dependencies {
   compile 'ch.hsr:geohash:1.0.10'
   compile 'com.google.guava:guava:18.0'
   compile 'io.ratpack:ratpack-jackson:0.9.9'
+  compile 'io.ratpack:ratpack-rx:0.9.9'
 
   runtime "org.slf4j:slf4j-simple:1.7.5"
   jmh "org.openjdk.jmh:jmh-core:$jmhVersion"
@@ -35,6 +36,9 @@ dependencies {
   // need to add the jmh jars to the compile config so idea picks them up
   compile "org.openjdk.jmh:jmh-core:$jmhVersion"
   compile "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
+
+  testCompile 'junit:junit:4.11'
+  testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 }
 
 

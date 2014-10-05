@@ -16,6 +16,7 @@
             <h1>Geo fun <small>Find hotels at the click of a mouse</small></h1>
         </div>
         <div class="row">
+            <div class="col-lg-8"><div id="map-canvas"></div></div>
             <div class="col-lg-2">
                 <div class="list-group location-list">
                     <%model.locations.each { location -> %>
@@ -23,8 +24,19 @@
                        data-lat="${location.point().latitude}" data-lng="${location.point().longitude}">${location.description()}</a>
                     <% } %>
                 </div>
+                <h4>Instructions</h4>
+                <p>Click on the map and it'll search in a 2km radius for hotels</p>
+                <p>Then... nothing really, there are a bunch of pins where there are hotels and that's it.</p>
             </div>
-            <div class="col-lg-8"><div id="map-canvas"></div></div>
+        </div>
+        <div class="row">
+            <h3>Notes</h3>
+            <p>The source for this app is available on
+                <a href="https://github.com/tempredirect/GeoFun">github.com/tempredirect/GeoFun</a> and is licensed
+                under a MIT License</p>
+            <p>The underlying data (ActivePropertyList.txt) is the <a href="http://www.expediaaffiliate.com/">Expedia Affiliate Network (ean.com)</a>
+            the details of which are on <a href="http://developer.ean.com/database-catalogs/relational/property-data/">developer.ean.com</a></p>
+
         </div>
     </div>
 

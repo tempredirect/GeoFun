@@ -1,4 +1,4 @@
-package com.ean.geofun;
+package com.logicalpractice.geofun;
 
 import ch.hsr.geohash.WGS84Point;
 import com.google.common.base.Charsets;

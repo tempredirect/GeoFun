@@ -4,14 +4,26 @@
         map,
         LatLng = google.maps.LatLng,
         Marker = google.maps.Marker,
-        defaultZoom = 11;
+        defaultZoom = 11,
+        searchRadiusKm = 2;
 
     function onMapClick(ev) {
+        var searchArea = new google.maps.Circle({
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#0000FF',
+            fillOpacity: 0.35,
+            map: map,
+            center: ev.latLng,
+            radius: searchRadiusKm * 1000
+        });
+
         jQuery.ajax("/search", {
             data: {
                 lat:ev.latLng.lat(),
                 lng:ev.latLng.lng(),
-                radius:2
+                radius: searchRadiusKm
             },
             success:function(data) {
                 var len = data.length,
@@ -29,11 +41,16 @@
                         })
                     }
                 }
+                setTimeout(function(){
+                    searchArea.setMap(null);
+                }, 1000);
             },
             error:function(xhr, status, error) {
+                searchArea.setMap(null);
                 console.error(status, error, xhr)
             }
         });
+
     }
     function resetAndMoveTo(latLng) {
         map.panTo(latLng);

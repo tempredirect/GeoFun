@@ -1,4 +1,4 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
 /**
  *

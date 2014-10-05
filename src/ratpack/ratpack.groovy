@@ -1,7 +1,7 @@
 import ch.hsr.geohash.WGS84Point
-import com.ean.geofun.search.GeoSearchModule
-import com.ean.geofun.search.Search
-import com.ean.geofun.WellKnownLocation
+import com.logicalpractice.geofun.search.GeoSearchModule
+import com.logicalpractice.geofun.search.Search
+import com.logicalpractice.geofun.WellKnownLocation
 import ratpack.jackson.JacksonModule
 
 import static ratpack.groovy.Groovy.ratpack

@@ -1,15 +1,14 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.queries.GeoHashCircleQuery;
-import com.ean.geofun.ActivePropertyList;
-import com.ean.geofun.Hotel;
+import com.logicalpractice.geofun.ActivePropertyList;
+import com.logicalpractice.geofun.Hotel;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -70,8 +69,8 @@ public class GeoHashSearch2 implements Search {
         .parallel()
         .flatMap(
             (hash) ->
-              prefixRange(hash.longValue(), hash.significantBits())
-                  .mapToObj((index) -> hotels[index])
+                prefixRange(hash.longValue(), hash.significantBits())
+                    .mapToObj((index) -> hotels[index])
         )
         .filter(
             (hotel) ->

@@ -1,8 +1,8 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
-import com.ean.geofun.ActivePropertyList;
-import com.ean.geofun.Hotel;
-import com.ean.geofun.WellKnownLocation;
+import com.logicalpractice.geofun.ActivePropertyList;
+import com.logicalpractice.geofun.Hotel;
+import com.logicalpractice.geofun.WellKnownLocation;
 
 import java.nio.file.Paths;
 import java.util.List;

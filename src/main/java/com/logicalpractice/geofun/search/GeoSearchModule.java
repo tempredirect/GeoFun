@@ -1,13 +1,12 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
-import com.ean.geofun.ActivePropertyList;
+import com.logicalpractice.geofun.ActivePropertyList;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import ratpack.launch.LaunchConfig;
 
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 /**
  *

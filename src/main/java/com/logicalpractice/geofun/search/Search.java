@@ -1,7 +1,7 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
 import ch.hsr.geohash.WGS84Point;
-import com.ean.geofun.Hotel;
+import com.logicalpractice.geofun.Hotel;
 
 import java.util.List;
 

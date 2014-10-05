@@ -1,10 +1,10 @@
-package com.ean.geofun.benchmarks;
+package com.logicalpractice.geofun.benchmarks;
 
-import com.ean.geofun.ActivePropertyList;
-import com.ean.geofun.search.GeoHashSearch;
-import com.ean.geofun.search.GeoHashSearch2;
-import com.ean.geofun.search.LinearSearch;
-import com.ean.geofun.search.ParallelLinearSearch;
+import com.logicalpractice.geofun.ActivePropertyList;
+import com.logicalpractice.geofun.search.GeoHashSearch;
+import com.logicalpractice.geofun.search.GeoHashSearch2;
+import com.logicalpractice.geofun.search.LinearSearch;
+import com.logicalpractice.geofun.search.ParallelLinearSearch;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-import static com.ean.geofun.WellKnownLocation.NEW_YORK_CITY;
+import static com.logicalpractice.geofun.WellKnownLocation.NEW_YORK_CITY;
 
 /**
  *

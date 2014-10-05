@@ -1,10 +1,8 @@
-package com.ean.geofun;
+package com.logicalpractice.geofun;
 
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.util.VincentyGeodesy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.awt.geom.Point2D;
 
 /**
  *

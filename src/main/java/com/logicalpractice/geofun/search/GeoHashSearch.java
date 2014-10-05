@@ -1,10 +1,10 @@
-package com.ean.geofun.search;
+package com.logicalpractice.geofun.search;
 
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.queries.GeoHashCircleQuery;
-import com.ean.geofun.ActivePropertyList;
-import com.ean.geofun.Hotel;
+import com.logicalpractice.geofun.ActivePropertyList;
+import com.logicalpractice.geofun.Hotel;
 
 import java.io.IOException;
 import java.util.ArrayList;
